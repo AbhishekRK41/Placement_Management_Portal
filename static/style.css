@@ -1,0 +1,26 @@
+body {
+    background-color: #f5f6fa;
+}
+
+h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+table {
+    background: white;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+.btn {
+    border-radius: 6px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Student Applications</h3>
+
+<table class="table">
+
+<tr>
+<th>Student ID</th>
+<th>Status</th>
+<th>Action</th>
+<th>Resume</th>
+</tr>
+
+{% for app in applications %}
+
+<tr>
+
+<td>{{app.student_id}}</td>
+
+<td>{{app.status}}</td>
+
+<td>
+
+<a class="btn btn-warning"
+href="/update_status/{{app.id}}/Shortlisted">
+Shortlist
+</a>
+
+<a class="btn btn-success"
+href="/update_status/{{app.id}}/Selected">
+Select
+</a>
+
+<a class="btn btn-danger"
+href="/update_status/{{app.id}}/Rejected">
+Reject
+</a>
+
+</td>
+
+<td>
+
+{% if app.resume %}
+
+<a class="btn btn-primary"
+href="/download/{{app.resume}}">
+Download Resume
+</a>
+
+{% else %}
+
+No Resume
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

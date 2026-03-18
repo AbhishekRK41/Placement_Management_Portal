@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Student Dashboard</h3>
+
+<h4>Available Placement Drives</h4>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Company</th>
+<th>Job</th>
+<th>Eligibility</th>
+<th>Deadline</th>
+<th>Status</th>
+</tr>
+
+{% for drive in drives %}
+
+<tr>
+
+<td>{{ drive.company.name }}</td>
+<td>{{ drive.job_title }}</td>
+<td>{{ drive.eligibility }}</td>
+<td>{{ drive.deadline }}</td>
+
+<td>
+
+{% if drive.id in app_map %}
+
+{% set application = app_map[drive.id] %}
+
+{% if application.status == "Pending" %}
+<span class="badge bg-warning">Pending</span>
+
+{% elif application.status == "Shortlisted" %}
+<span class="badge bg-primary">Shortlisted</span>
+
+{% elif application.status == "Selected" %}
+<span class="badge bg-success">Selected</span>
+
+{% elif application.status == "Rejected" %}
+<span class="badge bg-danger">Rejected</span>
+
+{% endif %}
+
+{% else %}
+
+<form method="POST" action="/apply/{{drive.id}}" enctype="multipart/form-data">
+
+<input type="file" name="resume" required>
+
+<button class="btn btn-success btn-sm mt-1">Apply</button>
+
+</form>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

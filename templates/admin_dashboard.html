@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Admin Dashboard</h3>
+
+<div class="row text-center">
+
+<div class="col-md-3">
+<div class="card p-3 shadow-sm">
+<h5>Students</h5>
+<h3>{{students}}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card p-3 shadow-sm">
+<h5>Companies</h5>
+<h3>{{companies}}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card p-3 shadow-sm">
+<h5>Drives</h5>
+<h3>{{drives}}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card p-3 shadow-sm">
+<h5>Applications</h5>
+<h3>{{apps}}</h3>
+</div>
+</div>
+
+</div>
+
+<hr>
+
+<h4>Pending Company Approvals</h4>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Company</th>
+<th>Action</th>
+</tr>
+
+{% for company in pending_companies %}
+
+<tr>
+
+<td>{{company.name}}</td>
+
+<td>
+<a class="btn btn-success btn-sm"
+href="/approve_company/{{company.id}}">
+Approve
+</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<hr>
+
+<h4>Pending Placement Drives</h4>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Company</th>
+<th>Drive</th>
+<th>Action</th>
+</tr>
+
+{% for drive in pending_drives %}
+
+<tr>
+
+<td>{{ drive.company.name }}</td>
+
+<td>{{ drive.job_title }}</td>
+
+<td>
+<a class="btn btn-success btn-sm"
+href="/approve_drive/{{drive.id}}">
+Approve
+</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<hr>
+
+<h4>Search History</h4>
+
+<form method="POST" action="/search_history">
+
+<div class="row mb-3">
+
+<div class="col-md-4">
+<input class="form-control" name="keyword" placeholder="Search by company or drive name">
+</div>
+
+<div class="col-md-2">
+<button class="btn btn-primary">Search</button>
+</div>
+
+</div>
+
+</form>
+
+<hr>
+
+<h4>Downloads</h4>
+
+<a class="btn btn-primary mb-3" href="/download_history">
+Download Company History
+</a>
+
+<a class="btn btn-success mb-3" href="/download_students">
+Download Registered Students
+</a>
+
+<hr>
+
+<h4>History</h4>
+
+<table class="table table-striped table-bordered">
+
+<tr>
+<th>Name</th>
+<th>Action</th>
+</tr>
+
+{% for h in history %}
+
+<tr>
+
+<td>{{ h.name }}</td>
+
+<td>
+
+{% if "Approved" in h.action %}
+<span class="badge bg-success">{{h.action}}</span>
+{% else %}
+<span class="badge bg-secondary">{{h.action}}</span>
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+{% endblock %}

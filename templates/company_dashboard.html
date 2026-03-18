@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Company Dashboard</h3>
+
+<a class="btn btn-primary mb-3" href="/create_drive/{{company.id}}">
+Create Placement Drive
+</a>
+
+<h4>Your Drives</h4>
+
+<table class="table">
+
+<tr>
+<th>Job Title</th>
+<th>Status</th>
+<th>Applications</th>
+</tr>
+
+{% for drive in drives %}
+
+<tr>
+
+<td>{{drive.job_title}}</td>
+
+<td>{{drive.status}}</td>
+
+<td>
+
+<a class="btn btn-info"
+href="/view_applications/{{drive.id}}">
+View
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
